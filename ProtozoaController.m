@@ -17,14 +17,20 @@
 
 }
 
-- (IBAction)showSource:(id)sender {
-	NSBundle *thisBundle = [NSBundle bundleForClass:[self class]];
+- (IBAction)showSource:(id)sender
+{
+	NSString *appPath = [[NSBundle mainBundle] bundlePath];
+	NSString *appName = [[NSProcessInfo processInfo] processName];
+	NSString *fullPath = [NSString stringWithFormat:@"%@/Contents/Source/%@.xcodeproj", appPath, appName];
+	NSWorkspace *sharedWorkspace = [NSWorkspace sharedWorkspace];
 	
-	NSString *source = [NSString stringWithFormat:@"%@/Contents/Source", [thisBundle bundlePath]];
-	NSString *project = [NSString stringWithFormat:@"%@/Protozoa.xcodeproj", source];
-	[[NSWorkspace sharedWorkspace] openFile:source];
-	[[NSWorkspace sharedWorkspace] openFile:project];	
-	[NSApp terminate: self];
+	if ([sharedWorkspace selectFile:fullPath inFileViewerRootedAtPath:nil])
+	{
+		if ([sharedWorkspace openFile:fullPath])
+		{
+			[NSApp terminate:self];
+		}
+	}
 }
 
 @end
