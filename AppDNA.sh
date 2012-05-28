@@ -2,7 +2,7 @@
 
 # AppDNA Script
 # Copyright 2006 Chuck Houpt. No rights reserved.
-# Copyright 2011 1951FDG. No rights reserved.
+# Copyright 2012 1951FDG. No rights reserved.
 
 set -eux
 
@@ -21,7 +21,7 @@ then
 
 	# Copy the source tree, minus resources, into Contents/Source.
 	rsync -rl --cvs-exclude \
-	--exclude 'build/' --exclude '.git/' --exclude '.hg/' \
+	--exclude 'build/' --exclude '.git/' --exclude '.hg/' --exclude '.hgtags' \
 	--exclude '*.mode1v3' --exclude '*.mode2v3' \
 	--exclude '*.pbxuser' --exclude '*.perspective' --exclude '*.perspectivev3' \
 	--exclude 'Credits.*' --exclude '*.DS_Store' \
